@@ -1,6 +1,6 @@
 # README
 
-This README would document the steps are necessary to get the
+This README would document the steps  necessary to get the
 application running with Rspec, capybara_webkit, devise with factory_girl and ffaker,
 and testing Admin Feature with simple_bdd.
 
