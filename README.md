@@ -9,8 +9,12 @@ Step 1: Follow steps listed here: https://github.com/blue0knight/GemCheatsheet/b
 Step 2: A basic rspec-rails test for a home feature and specification:
 
   2a. Create “features” folder in /spec
+
   2b. Create “home_spec.rb” in /spec/features
+
   2c. In /features/home_spec.rb, add the ff features and scenarios:
+
+  
       require 'rails_helper'
 
       feature "when visiting the homepage" do
@@ -20,11 +24,15 @@ Step 2: A basic rspec-rails test for a home feature and specification:
         end
       end
 
+
   2d. Create Home Controller with Index Method:
+
       $rails g controller Home index
 
   2e. Edit /config/routes.rb: (add the root_path)
+
       root ‘home#index’
 
   2f. Edit /app/views/home/index.html: (add welcome text)
+
       <p>Welcome to Ruby-App</p>
