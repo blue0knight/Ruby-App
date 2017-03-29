@@ -356,7 +356,7 @@ RSpec tests will give the following error:
 
 ```
 
-&nbsp;&nbsp;&nbsp;6h. in /app/controller/admin.rb
+&nbsp;&nbsp;&nbsp;6h. In /app/controller/admin.rb
 
 ```
   class AdminController < ApplicationController
@@ -365,5 +365,23 @@ RSpec tests will give the following error:
       @hackers = Hacker.all
     end
   end
+
+```
+&nbsp;&nbsp;&nbsp;6i: Add in app/views/admin/hacker_list.html.erb:
+
+```
+
+<h1>Hacker List</h1>
+
+ <thead>
+   <th>Email</th>
+   <th>Join Date</th>
+ </thead>
+ <tbody>
+   <% @hackers.each do |hacker| %>
+     <tr><%= hacker.email %></tr>
+     <tr><%= hacker.created_at.to_date %></tr>
+   <% end %>
+ </tbody>
 
 ```
