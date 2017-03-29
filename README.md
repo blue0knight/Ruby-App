@@ -275,4 +275,95 @@ Step 6: Testing Admin feature with simple_bdd
 
    ```
 
-&nbsp;&nbsp;&nbsp;6d. 
+&nbsp;&nbsp;&nbsp;6d. Update /app/views/layouts/application.html.erb
+  ```
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>Ruby-App</title>
+      <%= csrf_meta_tags %>
+
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    </head>
+
+    <body>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+
+      <%= link_to('Sign In', new_hacker_session_path) %>
+      <%= link_to('Admin Sign in', new_admin_session_path) %>
+     	<% if admin_signed_in? %>
+     		<%= link_to('View Hacker List', admin_hacker_list_path) %>
+     	<% end %>
+
+    <%= yield %>
+    </body>
+  </html>
+
+  ```
+&nbsp;&nbsp;&nbsp;6e. Generate model:
+
+  ```
+  $ rails g devise Admin
+
+    then run migration,
+
+  $ rake db:migrate
+
+  ```
+&nbsp;&nbsp;&nbsp;6f. Create factory: /app/spec/factories/admins.rb
+
+  ```
+  FactoryGirl.define do
+    factory :admin do
+      email { FFaker::Internet.email }
+      password {Devise.friendly_token.first(8)}
+    end
+  end
+
+  ```
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note: Rails app running Rails 5,
+RSpec tests will give the following error:
+
+```
+    rails aborted!
+    ActiveRecord::NoEnvironmentInSchemaError:
+
+    Environment data not found in the schema. To resolve this issue, run:
+
+        bin/rails db:environment:set RAILS_ENV=test
+
+```    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To Fix, run the ff:
+
+```
+  $ rails app:update:bin
+
+    and then,
+
+  $  bin/rails db:environment:set RAILS_ENV=test
+
+    and type "Y" to overwrite
+
+```
+
+&nbsp;&nbsp;&nbsp;6g. Admin controller: /app/controller/admin.rb  
+
+```
+  $ rails g controller Admin hacker_list
+
+```
+
+&nbsp;&nbsp;&nbsp;6h. in /app/controller/admin.rb
+
+```
+  class AdminController < ApplicationController
+    def hacker_list
+      authenticate_admin!
+      @hackers = Hacker.all
+    end
+  end
+
+```
