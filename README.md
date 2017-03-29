@@ -8,11 +8,11 @@ Step 1: Follow steps listed here: https://github.com/blue0knight/GemCheatsheet/b
 
 Step 2: A basic rspec-rails test for a home feature and specification:
 
-  2a. Create “features” folder in /spec
+  &nbsp;&nbsp;&nbsp;2a. Create “features” folder in /spec
 
-  2b. Create “home_spec.rb” in /spec/features
+  &nbsp;&nbsp;&nbsp;2b. Create “home_spec.rb” in /spec/features
 
-  2c. In /features/home_spec.rb, add the ff features and scenarios:
+  &nbsp;&nbsp;&nbsp;2c. In /features/home_spec.rb, add the ff features and scenarios:
 
 
       require 'rails_helper'
@@ -25,26 +25,26 @@ Step 2: A basic rspec-rails test for a home feature and specification:
       end
 
 
-  2d. Create Home Controller with Index Method:
+  &nbsp;&nbsp;&nbsp;2d. Create Home Controller with Index Method:
 
       $rails g controller Home index
 
-  2e. Edit /config/routes.rb: (add the root_path)
+  &nbsp;&nbsp;&nbsp;2e. Edit /config/routes.rb: (add the root_path)
 
       root ‘home#index’
 
-  2f. Edit /app/views/home/index.html: (add welcome text)
+  &nbsp;&nbsp;&nbsp;2f. Edit /app/views/home/index.html: (add welcome text)
 
       <p>Welcome to Ruby-App</p>
 
 Step 3: The capybara-webkit (test js in headless Webkit in Safari and Chrome) and
  database_cleaner setup:
 
-  3a. Visit [Capybara-Webkit Github](https://github.com/thoughtbot/capybara-webkit).
+  &nbsp;&nbsp;&nbsp;3a. Visit [Capybara-Webkit Github](https://github.com/thoughtbot/capybara-webkit).
 
-  3b. Visit [database-cleaner Github](https://github.com/DatabaseCleaner/database_cleaner).
+  &nbsp;&nbsp;&nbsp;3b. Visit [database-cleaner Github](https://github.com/DatabaseCleaner/database_cleaner).
 
-  3c. Setup: In /spec/rails_helper.rb change to:
+  &nbsp;&nbsp;&nbsp;3c. Setup: In /spec/rails_helper.rb change to:
 
   ```
 
@@ -126,3 +126,40 @@ Step 3: The capybara-webkit (test js in headless Webkit in Safari and Chrome) an
   end
 
   ```
+
+  &nbsp;&nbsp;&nbsp;3d. Update Home Spec and add a new scenario:
+
+  scenario "the visitor sees Javascript Message", :js => true do
+    visit root_path
+    expect(page).not_to have_errors
+    click_button "Javascript Message"
+    within(".modal-text") do
+      expect(page).to have_text("This is a Javascript Message!")
+    end
+    click_link "Close"
+    expect(page).not_to have_text("This is a Javascript Message!")
+  end
+
+  &nbsp;&nbsp;&nbsp;4d. Update /app/views/home/index.html (Add javascript modal)
+
+  <p><button id="modal-link">Click Javascript Message</button></p>
+  <div id="modal-background">
+    <div id="modal-window">
+      <p class="modal-text">This is a Javascript Message!</p>
+      <a href="#" class="close">Close</a>
+    </div>
+  </div>
+
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#modal-link').click(function() {
+        $('#modal-background').fadeIn();
+      });
+      $('.close').click(function() {
+          $('#modal-background').fadeOut();
+      });
+    });
+  </script>
+
+  &nbsp;&nbsp;&nbsp;4e. Add modal css in: /app/assets/css/home.scss

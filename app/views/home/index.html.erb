@@ -1,2 +1,22 @@
 <h1>Ruby App</h1>
 <p>Welcome to Ruby-App</p>
+
+<p><button id="modal-link">Click Javascript Message</button></p>
+<div id="modal-background">
+  <div id="modal-window">
+    <p class="modal-text">This is a Javascript Message!</p>
+    <a href="#" class="close">Close</a>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#modal-link').click(function() {
+      $('#modal-background').fadeIn();
+    });
+    $('.close').click(function() {
+        $('#modal-background').fadeOut();
+    });
+  });
+</script>
