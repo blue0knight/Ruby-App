@@ -129,6 +129,7 @@ Step 3: The capybara-webkit (test js in headless Webkit in Safari and Chrome) an
 
   &nbsp;&nbsp;&nbsp;3d. Update Home Spec and add a new scenario:
 
+```
   scenario "the visitor sees Javascript Message", :js => true do
     visit root_path
     expect(page).not_to have_errors
@@ -140,7 +141,10 @@ Step 3: The capybara-webkit (test js in headless Webkit in Safari and Chrome) an
     expect(page).not_to have_text("This is a Javascript Message!")
   end
 
+```
   &nbsp;&nbsp;&nbsp;4d. Update /app/views/home/index.html (Add javascript modal)
+
+```  
 
   <p><button id="modal-link">Click Javascript Message</button></p>
   <div id="modal-background">
@@ -161,5 +165,7 @@ Step 3: The capybara-webkit (test js in headless Webkit in Safari and Chrome) an
       });
     });
   </script>
+
+```
 
   &nbsp;&nbsp;&nbsp;4e. Add modal css in: /app/assets/css/home.scss
