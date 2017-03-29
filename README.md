@@ -169,3 +169,65 @@ Step 3: The capybara-webkit (test js in headless Webkit in Safari and Chrome) an
 ```
 
   &nbsp;&nbsp;&nbsp;4e. Add modal css in: /app/assets/css/home.scss
+
+Step 5: Testing Devise with factory_girl_rails and ffaker
+
+  &nbsp;&nbsp;&nbsp;5a. Run generator to install devise"
+    ```
+    $ rails generate devise:install
+    ```
+  &nbsp;&nbsp;&nbsp;5b. Create a new signin_spec.rb file in: /spec/features/signin_spec.rb
+
+  &nbsp;&nbsp;&nbsp;5c. Write new feature and scenarios:
+    ```
+    require 'rails_helper'
+
+    feature "signing in" do
+      let(:hacker) {FactoryGirl.create(:hacker)}
+
+      def fill_in_signin_fields
+        fill_in "hacker[email]", with: hacker.email
+        fill_in "hacker[password]", with: hacker.password
+        click_button "Log in"
+      end
+
+      scenario "visiting the site to sign in" do
+        visit root_path
+        click_link "Sign In"
+        fill_in_signin_fields
+        expect(page).to have_content("Signed in successfully.")
+      end
+
+    end
+
+    ```
+  &nbsp;&nbsp;&nbsp;5d. Create Devise model generator:
+    ```
+    $ rails generate devise Hacker
+
+    check out migration file to add any modules, then:
+
+    $ rake db:migrate
+
+    ```
+  &nbsp;&nbsp;&nbsp;5e. Add sign-in links (body section before "%= yield %")
+  in /app/views/layouts/application.html.erb:
+
+   ```
+   <p class="notice"><%= notice %></p>
+   <p class="alert"><%= alert %></p>
+
+   <%= link_to('Sign In', new_hacker_session_path) %>
+
+   ```
+
+   &nbsp;&nbsp;&nbsp;5f. Create Factory: /app/spec/factories/hackers.rb, edit to:
+
+   ```
+   FactoryGirl.define do
+     factory :hacker do
+       email { FFaker::Internet.email }
+       password {Devise.friendly_token.first(8)}
+     end
+   end
+   ```
