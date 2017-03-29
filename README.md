@@ -183,7 +183,6 @@ Step 5: Testing Devise with factory_girl_rails and ffaker
 
   &nbsp;&nbsp;&nbsp;5c. Write new feature and scenarios:
 
-    ```
     require 'rails_helper'
 
     feature "signing in" do
@@ -204,11 +203,9 @@ Step 5: Testing Devise with factory_girl_rails and ffaker
 
     end
 
-    ```
 
   &nbsp;&nbsp;&nbsp;5d. Create Devise model generator:
 
-    ```
 
     $ rails generate devise Hacker
 
@@ -216,7 +213,6 @@ Step 5: Testing Devise with factory_girl_rails and ffaker
 
     $ rake db:migrate
 
-    ```
 
   &nbsp;&nbsp;&nbsp;5e. Add sign-in links (body section before "%= yield %")
   in /app/views/layouts/application.html.erb:
