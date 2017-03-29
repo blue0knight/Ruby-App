@@ -173,12 +173,16 @@ Step 3: The capybara-webkit (test js in headless Webkit in Safari and Chrome) an
 Step 5: Testing Devise with factory_girl_rails and ffaker
 
   &nbsp;&nbsp;&nbsp;5a. Run generator to install devise"
-    ```
+
+
     $ rails generate devise:install
-    ```
+
+
   &nbsp;&nbsp;&nbsp;5b. Create a new signin_spec.rb file in: /spec/features/signin_spec.rb
 
+
   &nbsp;&nbsp;&nbsp;5c. Write new feature and scenarios:
+
     ```
     require 'rails_helper'
 
@@ -201,8 +205,11 @@ Step 5: Testing Devise with factory_girl_rails and ffaker
     end
 
     ```
+
   &nbsp;&nbsp;&nbsp;5d. Create Devise model generator:
+
     ```
+
     $ rails generate devise Hacker
 
     check out migration file to add any modules, then:
@@ -210,10 +217,12 @@ Step 5: Testing Devise with factory_girl_rails and ffaker
     $ rake db:migrate
 
     ```
+
   &nbsp;&nbsp;&nbsp;5e. Add sign-in links (body section before "%= yield %")
   in /app/views/layouts/application.html.erb:
 
    ```
+
    <p class="notice"><%= notice %></p>
    <p class="alert"><%= alert %></p>
 
@@ -275,7 +284,7 @@ Step 6: Testing Admin feature with simple_bdd
 
    ```
 
-&nbsp;&nbsp;&nbsp;6d. Update /app/views/layouts/application.html.erb
+&nbsp;&nbsp;&nbsp;6c. Update /app/views/layouts/application.html.erb
   ```
   <!DOCTYPE html>
   <html>
@@ -302,7 +311,7 @@ Step 6: Testing Admin feature with simple_bdd
   </html>
 
   ```
-&nbsp;&nbsp;&nbsp;6e. Generate model:
+&nbsp;&nbsp;&nbsp;6d. Generate model:
 
   ```
   $ rails g devise Admin
@@ -312,7 +321,7 @@ Step 6: Testing Admin feature with simple_bdd
   $ rake db:migrate
 
   ```
-&nbsp;&nbsp;&nbsp;6f. Create factory: /app/spec/factories/admins.rb
+&nbsp;&nbsp;&nbsp;6e. Create factory: /app/spec/factories/admins.rb
 
   ```
   FactoryGirl.define do
@@ -349,14 +358,14 @@ RSpec tests will give the following error:
 
 ```
 
-&nbsp;&nbsp;&nbsp;6g. Admin controller: /app/controller/admin.rb  
+&nbsp;&nbsp;&nbsp;6f. Admin controller: /app/controller/admin.rb  
 
 ```
   $ rails g controller Admin hacker_list
 
 ```
 
-&nbsp;&nbsp;&nbsp;6h. In /app/controller/admin.rb
+&nbsp;&nbsp;&nbsp;6g. In /app/controller/admin.rb
 
 ```
   class AdminController < ApplicationController
@@ -367,7 +376,7 @@ RSpec tests will give the following error:
   end
 
 ```
-&nbsp;&nbsp;&nbsp;6i: Add in app/views/admin/hacker_list.html.erb:
+&nbsp;&nbsp;&nbsp;6h: Add in app/views/admin/hacker_list.html.erb:
 
 ```
 
