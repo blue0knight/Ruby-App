@@ -1,7 +1,7 @@
 # README
 
 This README would document the steps are necessary to get the
-application with Rspec, capybara_webkit, devise with factory_girl and ffaker,
+application running with Rspec, capybara_webkit, devise with factory_girl and ffaker,
 and testing Admin Feature with simple_bdd.
 
 Step 1: Follow steps listed here: https://github.com/blue0knight/GemCheatsheet/blob/master/README.rdoc
@@ -231,3 +231,48 @@ Step 5: Testing Devise with factory_girl_rails and ffaker
      end
    end
    ```
+Step 6: Testing Admin feature with simple_bdd
+
+&nbsp;&nbsp;&nbsp;6a. Visit [simple-bdd Github](https://github.com/robb1e/simple_bdd)
+
+&nbsp;&nbsp;&nbsp;6b. Create /spec/features/admin_spec.rb:
+
+  ```
+  require 'rails_helper'
+
+   feature "Admin" do
+
+   	#communicate purpose first thing
+     scenario "admin sees hackers after login" do
+       Given "admin is signed in"
+       When "admin views all hackers"
+       Then "admin sees the first hacker"
+     end
+
+     #set up objects
+     let!(:admin) { FactoryGirl.create(:admin) }
+     let!(:hacker) { FactoryGirl.create(:hacker) }
+
+     #define methods from scenario
+     def admin_is_signed_in
+       visit root_path
+       click_link "Admin Sign in"
+       fill_in "admin[email]", with: admin.email
+       fill_in "admin[password]", with: admin.password
+       click_button "Log in"
+     end
+
+     def admin_views_all_hackers
+     	click_link "View Hacker List"
+       expect(page).to have_content("Hacker List")
+     end
+
+     def admin_sees_the_first_hacker
+       expect(page).to have_content(hacker.email)
+     end
+
+   end
+
+   ```
+
+&nbsp;&nbsp;&nbsp;6d. 
