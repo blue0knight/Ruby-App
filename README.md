@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This README would document the steps are necessary to get the
+application with Rspec, capybara_webkit, devise with factory_girl and ffaker,
+and testing Admin Feature with simple_bdd.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Step 1: Follow steps listed here: https://github.com/blue0knight/GemCheatsheet/blob/master/README.rdoc
